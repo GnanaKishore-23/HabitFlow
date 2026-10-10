@@ -21,12 +21,13 @@ jobs:
           test -f style.css
           test -f app.js
           test -f Dockerfile
+          test -f nginx.conf
 
       - name: Build Docker image
         run: docker build -t habitflow:ci .
 
       - name: Start test container
-        run: docker run -d --name habitflow-test -p 8080:80 habitflow:ci
+        run: docker run -d --name habitflow-test -p 8080:10000 habitflow:ci
 
       - name: Test website response
         run: |
