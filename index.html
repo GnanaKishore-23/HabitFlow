@@ -22,7 +22,7 @@
         <p class="eyebrow">YOUR DAILY ROUTINE</p>
         <h1>Small steps. <span>Big change.</span></h1>
         <p class="subheading">
-          Build consistency, one habit at a time.
+          Build consistency, one habit at a time. — DevOps CD Test
         </p>
       </div>
     </section>
@@ -60,7 +60,8 @@
             <p class="eyebrow">YOUR ROUTINE</p>
             <h2>Today's habits</h2>
           </div>
-          <button class="primary-button" id="openFormBtn">
+
+          <button type="button" class="primary-button" id="openFormBtn">
             ＋ Add habit
           </button>
         </div>
@@ -68,6 +69,7 @@
         <form id="habitForm" class="habit-form hidden">
           <div class="form-title-row">
             <h3 id="formHeading">Create a habit</h3>
+
             <button
               type="button"
               class="icon-button"
@@ -127,9 +129,17 @@
         </form>
 
         <div class="filter-row" role="group" aria-label="Filter habits">
-          <button class="filter active" data-filter="all">All habits</button>
-          <button class="filter" data-filter="pending">To do</button>
-          <button class="filter" data-filter="completed">Completed</button>
+          <button type="button" class="filter active" data-filter="all">
+            All habits
+          </button>
+
+          <button type="button" class="filter" data-filter="pending">
+            To do
+          </button>
+
+          <button type="button" class="filter" data-filter="completed">
+            Completed
+          </button>
         </div>
 
         <div id="habitList" class="habit-list"></div>
@@ -138,7 +148,8 @@
           <div class="empty-icon">✧</div>
           <h3>Your routine starts here</h3>
           <p>Add your first habit and start building a better day.</p>
-          <button class="primary-button" id="emptyAddBtn">
+
+          <button type="button" class="primary-button" id="emptyAddBtn">
             ＋ Create your first habit
           </button>
         </div>
@@ -148,18 +159,22 @@
         <div class="side-card quote-card">
           <div class="quote-symbol">“</div>
           <p class="eyebrow">A GENTLE REMINDER</p>
+
           <blockquote>
             Consistency is more important than perfection.
           </blockquote>
+
           <p class="muted">Show up for yourself today.</p>
         </div>
 
         <div class="side-card">
           <p class="eyebrow">DAILY TARGET</p>
           <h3>Keep your momentum</h3>
+
           <div class="progress-track">
             <div id="progressBar" class="progress-fill"></div>
           </div>
+
           <p class="muted" id="progressMessage">
             Complete a habit to begin your progress.
           </p>
@@ -167,6 +182,7 @@
 
         <div class="side-card">
           <p class="eyebrow">QUICK TIP</p>
+
           <p class="tip-text">
             Make a new habit small enough that you can do it even on a busy day.
           </p>
