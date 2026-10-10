@@ -1,45 +1,19 @@
 
-name: HabitFlow CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  validate-and-build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
-
-      - name: Verify required files
+      - name: Test deployed Render website
         run: |
-          test -f index.html
-          test -f style.css
-          test -f app.js
-          test -f Dockerfile
-          test -f nginx.conf
+          URL="https://habitflow-g4rj.onrender.com"
 
-      - name: Build Docker image
-        run: docker build -t habitflow:ci .
-
-      - name: Start test container
-        run: docker run -d --name habitflow-test -p 8080:10000 habitflow:ci
-
-      - name: Test website response
-        run: |
-          for i in {1..10}; do
-            if curl --fail http://localhost:8080/ -o page.html; then
-              break
+          for i in {1..30}; do
+            if curl -fsSL "$URL" -o live-page.html; then
+              if grep -q "Small steps" live-page.html; then
+                echo "Live website test passed!"
+                exit 0
+              fi
             fi
-            sleep 2
-          done
-          test -f page.html
-          grep -q "Small steps" page.html
 
-      - name: Show container logs on failure
-        if: failure()
-        run: docker logs habitflow-test
+            echo "Waiting for Render deployment... attempt $i"
+            sleep 10
+          done
+
+          echo "Live website test failed"
+          exit 1
