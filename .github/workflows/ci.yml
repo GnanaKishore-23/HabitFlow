@@ -24,3 +24,21 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t habitflow:ci .
+
+      - name: Start test container
+        run: docker run -d --name habitflow-test -p 8080:80 habitflow:ci
+
+      - name: Test website response
+        run: |
+          for i in {1..10}; do
+            if curl --fail http://localhost:8080/ -o page.html; then
+              break
+            fi
+            sleep 2
+          done
+          test -f page.html
+          grep -q "Small steps" page.html
+
+      - name: Show container logs on failure
+        if: failure()
+        run: docker logs habitflow-test
