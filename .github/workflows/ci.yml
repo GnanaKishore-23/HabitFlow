@@ -1,0 +1,26 @@
+
+name: HabitFlow CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Verify required files
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f app.js
+          test -f Dockerfile
+
+      - name: Build Docker image
+        run: docker build -t habitflow:ci .
